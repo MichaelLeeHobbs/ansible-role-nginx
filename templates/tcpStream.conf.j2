@@ -1,0 +1,15 @@
+{% for stream in tcp_streams %}
+server {
+        listen {{stream.listen_ip}}:{{stream.listen_port}};
+        proxy_pass {{stream.name}};
+{% if stream.proxy_bind %}
+        proxy_bind {{stream.proxy_bind}};
+{% endif %}
+        error_log /var/log/nginx/{{stream.name}}.log debug;
+}
+upstream {{stream.name}} {
+{% for server in stream.upstream_servers%}
+        server {{server.ip}}:{{server.port}};
+{% endfor %}
+}
+{% endfor %}

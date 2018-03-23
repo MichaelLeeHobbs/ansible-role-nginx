@@ -79,3 +79,8 @@ http {
 
     {% block http_end %}{% endblock %}
 }
+
+# tcp stream block
+stream {
+        include {{ nginx_conf_path }}/tcpconf.d/*.conf;
+}
