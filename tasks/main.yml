@@ -51,14 +51,5 @@
   when: tcp_streams is defined
   template: src=tcpStream.conf dest={{ nginx_conf_path }}/tcpconf.d/tcpStream.conf
 
-- name: Insert firewalld rules for tcp stream ports
-  firewalld: port="{{ item.listen_port  }}/tcp" permanent=true state=enabled immediate=yes
-  with_items: "{{ tcp_streams }}"
-
-- name: Selinux - enable tcp ports for nginx tcp streams
-  when: tcp_streams is defined
-  seport: port={{ item.listen_port }} proto=tcp setype=http_port_t state=present
-  with_items: "{{ tcp_streams }}"
-
 - name: Ensure nginx is started and enabled to start at boot.
   service: name=nginx state=started enabled=yes

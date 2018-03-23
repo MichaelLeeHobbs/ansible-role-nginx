@@ -12,3 +12,16 @@
   yum:
     name: "{{ nginx_package_name }}"
     state: installed
+
+- name: Insert firewalld rules for tcp ports
+  firewalld: port="{{ item }}/tcp" permanent=true state=enabled immediate=yes
+  with_items: "{{ tcp_ports }}"
+
+- name: Insert firewalld rules for tcp stream ports
+  firewalld: port="{{ item.listen_port  }}/tcp" permanent=true state=enabled immediate=yes
+  with_items: "{{ tcp_streams }}"
+
+- name: Selinux - enable tcp ports for nginx tcp streams
+  when: tcp_streams is defined
+  seport: port={{ item.listen_port }} proto=tcp setype=http_port_t state=present
+  with_items: "{{ tcp_streams }}"
