@@ -1,5 +1,5 @@
 {% if tcp_streams is defined %}
-load_module /usr/lib64/nginx/modules/ngx_stream_module.so;
+{{ load_module_ngx_stream }}
 {% endif %}
 
 user  {{ nginx_user }};
