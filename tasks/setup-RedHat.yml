@@ -38,3 +38,6 @@
   seport: ports={{ item.listen_port }} proto=tcp setype=http_port_t state=present
   with_items: "{{ tcp_streams }}"
 
+
+load_module_ngx_stream: load_module /usr/lib64/nginx/modules/ngx_stream_module.so;
+
