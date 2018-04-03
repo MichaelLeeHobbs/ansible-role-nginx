@@ -49,7 +49,7 @@
 
 - name: Create nginx tcpStream configs
   when: tcp_streams is defined
-  template: src=tcpStream.conf dest="{{ nginx_conf_path }}/tcpconf.d/tcpStream.conf.j2"
+  template: src=tcpStream.conf.j2 dest="{{ nginx_conf_path }}/tcpconf.d/tcpStream.conf"
 
 - name: Ensure nginx is started and enabled to start at boot.
   service: name=nginx state=started enabled=yes
