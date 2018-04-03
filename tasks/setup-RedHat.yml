@@ -30,6 +30,6 @@
 
 - name: Selinux - enable tcp stream ports for nginx tcp streams
   when: tcp_streams is defined
-  seport: port={{ item.listen_port }} proto=tcp setype=http_port_t state=present
+  seport: ports={{ item.listen_port }} proto=tcp setype=http_port_t state=present
   with_items: "{{ tcp_streams }}"
 
