@@ -13,6 +13,11 @@
     name: "{{ nginx_package_name }}"
     state: installed
 
+- name: Ensure policycoreutils-python is installed for Ansivle Selinux seport module.
+  yum:
+    name: policycoreutils-python
+    state: installed
+
 - name: Insert firewalld rules for tcp ports
   firewalld: port="{{ item }}/tcp" permanent=true state=enabled immediate=yes
   when: tcp_ports is defined
