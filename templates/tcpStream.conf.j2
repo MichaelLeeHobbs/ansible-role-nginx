@@ -2,7 +2,7 @@
 server {
         listen {{stream.listen_ip}}:{{stream.listen_port}};
         proxy_pass {{stream.name}};
-{% if stream.proxy_bind %}
+{% if stream.proxy_bind is defined %}
         proxy_bind {{stream.proxy_bind}};
 {% endif %}
         error_log /var/log/nginx/{{stream.name}}.log debug;
