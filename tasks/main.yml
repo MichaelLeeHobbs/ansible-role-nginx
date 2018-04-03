@@ -44,12 +44,12 @@
 # Nginx tcp streams
 - name: Create {{ nginx_conf_path }}/tcpconf.d directory
   file:
-    path: {{ nginx_conf_path }}/tcpconf.d
+    path: "{{ nginx_conf_path }}/tcpconf.d"
     state: directory
 
 - name: Create nginx tcpStream configs
   when: tcp_streams is defined
-  template: src=tcpStream.conf dest={{ nginx_conf_path }}/tcpconf.d/tcpStream.conf
+  template: src=tcpStream.conf dest="{{ nginx_conf_path }}/tcpconf.d/tcpStream.conf"
 
 - name: Ensure nginx is started and enabled to start at boot.
   service: name=nginx state=started enabled=yes
