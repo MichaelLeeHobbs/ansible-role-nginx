@@ -5,7 +5,7 @@ server {
 {% if stream.proxy_bind is defined %}
         proxy_bind {{stream.proxy_bind}};
 {% endif %}
-        error_log /var/log/nginx/{{stream.name}}.log debug;
+        error_log /var/log/nginx/{{stream.name}}.log;
 }
 upstream {{stream.name}} {
 {% for server in stream.upstream_servers%}
